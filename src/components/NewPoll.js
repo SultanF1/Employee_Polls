@@ -7,6 +7,9 @@ function NewPoll(props) {
   const navigate = useNavigate();
   const [text, setText] = useState("");
   const [text2, setText2] = useState("");
+  const url = window.location.href;
+  const split = url.split("/");
+  const authedUser = split[split.length - 1];
   function handleChange(e) {
     if (e.target.id === "1") {
       setText(e.target.value);
@@ -17,10 +20,10 @@ function NewPoll(props) {
   function handleSubmit() {
     const optionOneText = text;
     const optionTwoText = text2;
-    const author = "sarahedo";
+    const author = authedUser;
 
     props.dispatch(handleAddQuestion({ optionOneText, optionTwoText, author }));
-    navigate("/");
+    navigate(`/home/${authedUser}`);
   }
   return (
     <div>
