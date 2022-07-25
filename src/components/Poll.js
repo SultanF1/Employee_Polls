@@ -7,11 +7,11 @@ import { toDate } from "../utils/helpers";
 function Poll(props) {
   const q = props.questions[props.id];
   const navigate = useNavigate();
-  const url = window.location.href;
-  const split = url.split("/");
-  const authedUser = split[split.length - 1];
+  
+  
+  const authedUser = props.users.authedUser
   function handleSubmit() {
-    navigate(`/poll/${props.id}/${authedUser}`);
+    navigate(`/questions/${props.id}`);
     console.log("first");
   }
 

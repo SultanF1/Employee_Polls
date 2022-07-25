@@ -8,6 +8,7 @@ import { Routes, Route } from "react-router-dom";
 import PollPage from "./PollPage";
 import Navbar from "./Navbar";
 import Leaderboard from "./Leaderboard";
+import NotFound from "./NotFound";
 const App = (props) => {
   useEffect(() => {
     props.dispatch(handleInitialData());
@@ -19,11 +20,12 @@ const App = (props) => {
         <h1>Loading</h1>
       ) : (
         <Routes>
+          <Route path="*" element={<NotFound />} />
           <Route path="/" exact element={<Login />} />
-          <Route path="/leaderboard/:uid" exact element={<Leaderboard />} />
-          <Route path="/home/:uid" exact element={<Dashboard />} />
-          <Route path="/poll/:id/:uid" element={<PollPage />} />
-          <Route path="/new/:uid" element={<NewPoll />} />
+          <Route path="/leaderboard" exact element={<Leaderboard />} />
+          <Route path="/home" exact element={<Dashboard />} />
+          <Route path="/questions/:id" element={<PollPage />} />
+          <Route path="/add" element={<NewPoll />} />
         </Routes>
       )}
     </div>

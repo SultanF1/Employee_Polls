@@ -2,10 +2,8 @@ import { connect } from "react-redux";
 import "../styles/style.css";
 import { handleAddAnswer } from "../actions/questions";
 import { withRouter } from "../utils/helpers";
-
 import Navbar from "./Navbar";
 import { useNavigate } from "react-router-dom";
-
 import { useEffect, useState } from "react";
 
 function PollPage(props) {
@@ -13,9 +11,9 @@ function PollPage(props) {
 
   const navigate = useNavigate();
   const qid = props.id;
-  const url = window.location.href;
-  const split = url.split("/");
-  const authedUser = split[split.length - 1];
+  
+  
+  const authedUser = props.users.authedUser;
   const [done, setDone] = useState(false);
   function check() {
     if (Object.keys(props.users[authedUser].answers).includes(props.id)) {
@@ -34,9 +32,11 @@ function PollPage(props) {
       const answer = "optionTwo";
       props.dispatch(handleAddAnswer({ authedUser, qid, answer }));
     }
-    navigate(`/home/${authedUser}`);
+    navigate(`/home`);
   }
   const total = poll.optionOne.votes.length + poll.optionTwo.votes.length;
+  
+  
   return (
     <div>
       <Navbar />
@@ -60,6 +60,7 @@ function PollPage(props) {
               <p>Percentage: {(poll.optionTwo.votes.length / total) * 100}%</p>
             </div>
           </div>
+          <h1>You chose ({props.questions[qid][props.users[authedUser].answers[qid]].text})</h1>
         </div>
       ) : (
         <div>

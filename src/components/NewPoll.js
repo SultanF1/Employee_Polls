@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { connect } from "react-redux";
 import { handleAddQuestion } from "../actions/questions";
 import { useNavigate, Link } from "react-router-dom";
@@ -7,9 +7,25 @@ function NewPoll(props) {
   const navigate = useNavigate();
   const [text, setText] = useState("");
   const [text2, setText2] = useState("");
-  const url = window.location.href;
-  const split = url.split("/");
-  const authedUser = split[split.length - 1];
+  const [loggedIn, setLoggedIn] = useState(
+    typeof props.users.authedUser !== "undefined"
+  );
+  
+  
+  
+      
+
+      
+      
+      useEffect(() => {
+       if(!loggedIn){
+        return navigate('/')
+       }
+      
+      }, [loggedIn])
+  
+  const authedUser = props.users.authedUser
+
   function handleChange(e) {
     if (e.target.id === "1") {
       setText(e.target.value);
@@ -23,8 +39,10 @@ function NewPoll(props) {
     const author = authedUser;
 
     props.dispatch(handleAddQuestion({ optionOneText, optionTwoText, author }));
-    navigate(`/home/${authedUser}`);
+    navigate(`/home`);
   }
+
+
   return (
     <div>
       <Navbar />
@@ -62,5 +80,11 @@ function NewPoll(props) {
     </div>
   );
 }
+const mapStateToProps = ({questions, users}) => {
+  return {
+    questions,
+    users,
+  }
+}
 
-export default connect()(NewPoll);
+export default connect(mapStateToProps)(NewPoll);

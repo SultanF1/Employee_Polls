@@ -6,6 +6,7 @@ import { Routes, Route } from "react-router-dom";
 import App from "./App";
 import PollPage from "./PollPage";
 import NewPoll from "./NewPoll";
+import { authenticateUser } from "../actions/users";
 
 function Login(props) {
   const navigate = useNavigate();
@@ -31,6 +32,7 @@ function Login(props) {
         props.users[key].password === password
       ) {
         setSuccess(true);
+        props.dispatch(authenticateUser(name))
         break;
       }
     }
@@ -66,7 +68,10 @@ function Login(props) {
         </button>
       </div>
       {success ? (
-        <div data-testid="success">{navigate(`/home/${name}`)}</div>
+        <div data-testid="success">
+            
+            {navigate(`/home`)}
+            </div>
       ) : (
         <div data-testid="alert"></div>
       )}

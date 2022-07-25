@@ -1,20 +1,27 @@
 import { Link } from "react-router-dom";
 import "../styles/style.css";
+import { connect } from "react-redux";
+import {useState} from 'react'
+
 function Navbar(props) {
-  const url = window.location.href;
-  const split = url.split("/");
-  const uid = split[split.length - 1];
+  
+  const [loggedIn, setLoggedIn] = useState(
+    typeof props.users.authedUser !== "undefined"
+  );
+  if(loggedIn){
+  const uid = props.users.authedUser;
+  
   return (
     <nav className="nav">
       <ul>
         <li className="left" data-testid="home">
-          <Link to={`/home/${uid}`}>Home</Link>
+          <Link to={`/home`}>Home</Link>
         </li>
         <li className="left" data-testid="new">
-          <Link to={`/new/${uid}`}>New Poll</Link>
+          <Link to={`/add`}>New Poll</Link>
         </li>
         <li className="left" data-testid="leaderboard">
-          <Link to={`/leaderboard/${uid}`}>Leaderboard</Link>
+          <Link to={`/leaderboard`}>Leaderboard</Link>
         </li>
         <li className="right" data-testid="logout">
           <Link to={`/`}>Logout</Link>
@@ -25,6 +32,19 @@ function Navbar(props) {
       </ul>
     </nav>
   );
+  }
+  else{
+    return(<div></div>);
+  }
 }
 
-export default Navbar;
+const mapStateToProps = ({ users, questions }) => {
+  return {
+    users,
+    questions,
+    
+  };
+};
+
+export default connect(mapStateToProps)(Navbar);
+
