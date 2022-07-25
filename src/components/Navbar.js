@@ -13,6 +13,7 @@ function Navbar(props) {
   
   return (
     <nav className="nav">
+      
       <ul>
         <li className="left" data-testid="home">
           <Link to={`/home`}>Home</Link>
@@ -34,7 +35,7 @@ function Navbar(props) {
   );
   }
   else{
-    return(<div></div>);
+    return(<button onClick={()=>setLoggedIn(true)} data-testid='button'></button>);
   }
 }
 

@@ -4,17 +4,21 @@ import Navbar from "./Navbar";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+
+
 function Leaderboard(props) {
+  const navigate = useNavigate()
+
   const [loggedIn, setLoggedIn] = useState(
     typeof props.users.authedUser !== "undefined"
   );
-  const navigate = useNavigate();
+  
 
   console.log("entered");
 
   useEffect(() => {
     if (!loggedIn) {
-      return navigate("/");
+      return navigate("/login",{ state: { invalidPoll: false}});
     }
   }, [loggedIn]);
 
@@ -65,7 +69,7 @@ function Leaderboard(props) {
       </div>
     );
   } else {
-    return <div></div>;
+    return(<button onClick={()=>setLoggedIn(true)} data-testid='button'></button>);
   }
 }
 

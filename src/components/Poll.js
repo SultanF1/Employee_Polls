@@ -18,9 +18,9 @@ function Poll(props) {
   return (
     <div>
       <div className="pollBox">
-        <h2>{q.author}</h2>
+        <h2 data-testid='author'>{q.author}</h2>
         <h2>{props.done}</h2>
-        <p className="date">{toDate(q.timestamp)}</p>
+        <p className="date" data-testid='date'>{toDate(q.timestamp)}</p>
         <button onClick={handleSubmit}>Show</button>
       </div>
     </div>

@@ -19,7 +19,7 @@ function NewPoll(props) {
       
       useEffect(() => {
        if(!loggedIn){
-        return navigate('/')
+        return navigate('/login',{ state: { invalidPoll: false}})
        }
       
       }, [loggedIn])
