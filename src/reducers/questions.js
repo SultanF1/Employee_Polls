@@ -9,13 +9,10 @@ export default function questions(state = {}, action) {
                 ...action.questions
             };
         case ADD_ANSWER:
-          
+            let temp =state
+            temp[action.qid][action.answer].votes = temp[action.qid][action.answer].votes.concat(action.authedUser)
             return{
-                ...state,
-                [action.qid]: {
-                    ...state[action.qid],
-                    [action.answer]: state[action.qid][action.answer].votes.concat([action.authedUser])
-                }
+                ...temp,
             }
         case ADD_QUESTION:
          
