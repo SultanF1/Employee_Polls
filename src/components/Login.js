@@ -1,12 +1,8 @@
 import { useState } from "react";
 import { connect } from "react-redux";
-import Dashboard from "./Dashboard";
-import { useNavigate, Link } from "react-router-dom";
-import { Routes, Route } from "react-router-dom";
-import App from "./App";
-import PollPage from "./PollPage";
-import NewPoll from "./NewPoll";
+import { useNavigate } from "react-router-dom";
 import { authenticateUser } from "../actions/users";
+import { useEffect } from "react";
 
 function Login(props) {
   const navigate = useNavigate();
@@ -15,26 +11,33 @@ function Login(props) {
   const [password, setPassword] = useState("");
   const [success, setSuccess] = useState(false);
 
-  function handleChange(e) {
+  const handleChange = (e)=> {
     if (e.target.id === "name") {
-      setName(e.target.value);
-    } else {
-      setPassword(e.target.value);
+      
+      setName(e.target.value)
+    } else if(e.target.id === "password") {
+        setPassword(e.target.value)
     }
-    setSuccess(false);
+    
   }
-
+  
   function handleSubmit() {
     console.log(props);
+    let found = false
     for (let key in props.users) {
       if (
         props.users[key].id === name &&
         props.users[key].password === password
       ) {
-        setSuccess(true);
-        props.dispatch(authenticateUser(name))
-        break;
+            found = true
+
       }
+    }
+    if (found) {
+            props.dispatch(authenticateUser(name))
+            navigate('/home')
+            
+          
     }
   }
 

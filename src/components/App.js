@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { handleInitialData } from "../actions/shared";
 import Login from "./Login";
 import Dashboard from "./Dashboard";
@@ -12,7 +12,7 @@ import NotFound from "./NotFound";
 const App = (props) => {
   useEffect(() => {
     props.dispatch(handleInitialData());
-  }, []);
+  }, [props]);
 
   return (
     <div>

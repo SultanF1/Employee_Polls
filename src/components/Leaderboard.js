@@ -14,7 +14,7 @@ function Leaderboard(props) {
   );
   
 
-  console.log("entered");
+  
 
   useEffect(() => {
     if (!loggedIn) {
@@ -44,6 +44,7 @@ function Leaderboard(props) {
         <Navbar />
         <h1>Leaderboard</h1>
         <table id="customers">
+        <tbody>
           <tr>
             <th data-testid="user">User</th>
             <th data-testid="created">Created</th>
@@ -65,6 +66,7 @@ function Leaderboard(props) {
               <td>{Object.keys(props.users[m].answers).length}</td>
             </tr>
           ))}
+        </tbody>
         </table>
       </div>
     );

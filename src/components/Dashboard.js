@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import Login from "./Login";
 import Poll from "./Poll";
 import "../styles/style.css";
 import Navbar from "./Navbar";
@@ -18,12 +17,12 @@ function Dashboard(props) {
     }
   }, [loggedIn]);
 
-  console.log(loggedIn);
+  
   const [ready, setReady] = useState(Object.keys(props.questions).length !== 0);
   const [show,setShow] = useState(false);
   if (loggedIn) {
     const uid = props.users.authedUser;
-    console.log("uid", uid);
+    
 
     let answered = Object.keys(props.users[uid].answers);
 
@@ -51,7 +50,7 @@ function Dashboard(props) {
         sortable.sort(function(a, b) {
           return b[1] - a[1];
       });
-        console.log('sroted',sortable)
+        
         unanswered = sortable.map(data => data[0])
       
       }

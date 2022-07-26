@@ -1,7 +1,7 @@
 import { useState,useEffect } from "react";
 import { connect } from "react-redux";
 import { handleAddQuestion } from "../actions/questions";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 function NewPoll(props) {
   const navigate = useNavigate();

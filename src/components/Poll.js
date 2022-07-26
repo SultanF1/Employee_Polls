@@ -1,8 +1,6 @@
-import { useState } from "react";
 import { connect } from "react-redux";
 import "../styles/style.css";
-import PollPage from "./PollPage";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toDate } from "../utils/helpers";
 function Poll(props) {
   const q = props.questions[props.id];

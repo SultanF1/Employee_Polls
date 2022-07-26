@@ -30,7 +30,7 @@ function ForcedLogin(props) {
       ) {
         setSuccess(true);
         props.dispatch(authenticateUser(name));
-        break;
+       
       }
     }
   }
